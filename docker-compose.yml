@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  travis:
+    image: roeldev/php-devkit:${PHP_VERSION}-${IMAGE_TAG}
+    build:
+      context: .
+      args:
+        PHP_VERSION: "${PHP_VERSION}"
+
+  local:
+    image: roeldev/php-devkit:local
+    container_name: php-devkit
+    build:
+      context: .
+      args:
+        PHP_VERSION: "7.3"
