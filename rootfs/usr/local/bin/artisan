@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+
+dir="$( pwd )"
+while [ "${dir}" != "/" ]
+do
+    artisan="${dir}/artisan"
+    if [ -e "${artisan}" ]
+    then
+        echo "${artisan}"
+        php "${artisan}" "$@"
+        exit 0
+    fi
+
+    dir="$( dirname "${dir}" )"
+done
+
+exit 1
