@@ -6,26 +6,15 @@ CONTAINER_NAME=php-devkit
 DEFAULT_PHP_VERSION=7.3
 
 .PHONY it:
-it: build start
+it: build login
 
 .PHONY build:
 build:
 	docker-compose build local
 
-.PHONY start:
-start:
-	docker-compose up local
-
-.PHONY stop:
-stop:
-	docker stop ${CONTAINER_NAME}
-
 .PHONY kill:
-kill: stop
+kill:
 	docker rm ${CONTAINER_NAME}
-
-.PHONY restart:
-restart: stop start
 
 .PHONY inspect:
 inspect:
@@ -37,8 +26,8 @@ tag:
 
 .PHONY login:
 login:
-	docker exec -it ${CONTAINER_NAME} bash
+	docker-compose run local bash
 
 .PHONY renew:
 renew:
-	docker pull roeldev/php-composer:${DEFAULT_PHP_VERSION}-v1.5
+	docker pull php:${DEFAULT_PHP_VERSION}--cli-alpine
