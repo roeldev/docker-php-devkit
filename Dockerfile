@@ -28,17 +28,14 @@ RUN set -x \
  && ./install_composer.sh \
  && rm /install_composer.sh
 
+# add xdebug install script
+COPY install_xdebug.sh /
+ARG INSTALL_XDEBUG=true
 RUN set -x \
- # install xdebug dependencies
- && apk add \
-    --no-cache \
-    --virtual phpize-deps \
-        autoconf \
-        g++ \
-        make \
- # install xdebug
- && pecl install xdebug \
- && docker-php-ext-enable xdebug
+ && chmod +x /install_xdebug.sh \
+ # install xdebug (default = true)
+ && if ${INSTALL_XDEBUG}; then ./install_xdebug.sh; fi \
+ && rm /install_xdebug.sh
 
 RUN set -x \
  && apk add \
@@ -50,7 +47,6 @@ RUN set -x \
          tzdata \
  && mkdir /project \
  # cleanup
- && apk del phpize-deps \
  && rm -rf /tmp/* \
  # result
  && php -v \
