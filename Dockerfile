@@ -45,16 +45,18 @@ RUN set -x \
          htop \
          nano \
          tzdata \
- && mkdir /project \
  # cleanup
- && rm -rf /tmp/* \
- # result
- && php -v \
- && composer --version --no-ansi
+ && rm -rf /tmp/*
 
 # add local files
 COPY rootfs/ /
 
+RUN set -x \
+ && chmod +x /init.sh \
+ # show result of our building efforts
+ && php -v \
+ && composer --version --no-ansi
+
 WORKDIR /project/
-VOLUME ["/composer/"]
+VOLUME ["/composer/", "/project/"]
 ENTRYPOINT ["/init.sh"]
