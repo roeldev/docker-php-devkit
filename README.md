@@ -16,17 +16,17 @@ docker-php-devkit
 [docker-pulls-url]: https://hub.docker.com/r/roeldev/php-devkit
 
 
-PHP devkit image with Composer and Xdebug enabled, based on Alpine Linux with S6 overlay. 
+PHP devkit image with Composer and Xdebug enabled (not for PHP alphas/betas/rcs), based on the official PHP Alpine images.
 
 
 # Versions
 
 | Image | PHP | Composer | Info |
 |-------|-----|----------|------|
-| [roeldev/php-devkit:7.1-latest][docker-tags-url] | 7.1.28 | 1.8.6 | [![mb-71-img]][mb-71-url]
-| [roeldev/php-devkit:7.2-latest][docker-tags-url] | 7.2.17 | 1.8.6 | [![mb-72-img]][mb-72-url]
-| [roeldev/php-devkit:7.3-latest][docker-tags-url] | 7.3.4 | 1.8.6 | [![mb-73-img]][mb-73-url]
-| [roeldev/php-devkit:7.4-rc-latest][docker-tags-url] | 7.4.0alpha1 | 1.8.6 | [![mb-74-img]][mb-74-url]
+| [roeldev/php-devkit:7.1-latest][docker-tags-url] | 7.1.28 | 1.9.0 | [![mb-71-img]][mb-71-url]
+| [roeldev/php-devkit:7.2-latest][docker-tags-url] | 7.2.17 | 1.9.0 | [![mb-72-img]][mb-72-url]
+| [roeldev/php-devkit:7.3-latest][docker-tags-url] | 7.3.4 | 1.9.0 | [![mb-73-img]][mb-73-url]
+| [roeldev/php-devkit:7.4-rc-latest][docker-tags-url] | 7.4.0beta2 | - | [![mb-74-img]][mb-74-url]
 
 [docker-tags-url]: https://hub.docker.com/r/roeldev/php-devkit/tags
 [mb-71-img]: https://images.microbadger.com/badges/image/roeldev/php-devkit:7.1-latest.svg
