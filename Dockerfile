@@ -1,10 +1,12 @@
 ARG PHP_VERSION="7.3"
 FROM php:${PHP_VERSION}-cli-alpine
 
+# expose environment variables
 ENV PS1="$(whoami)@$(hostname):$(pwd) \\$ " \
     PATH="/root/.composer/vendor/bin:$PATH" \
     COMPOSER_ALLOW_SUPERUSER=1 \
-    PHP_EXTENSIONS=""
+    PHP_EXTENSIONS="" \
+    COMPOSER_REQUIRE=""
 
 RUN set -x \
  # update already installed packages
@@ -52,11 +54,24 @@ RUN set -x \
 COPY rootfs/ /
 
 RUN set -x \
+ # make executable, otherwise we can't enter the running container
  && chmod +x /init.sh \
- # show result of our building efforts
+ # install useful dev tools
+ && composer global require \
+    --no-ansi \
+    --no-cache \
+        phploc/phploc \
+        phpstan/phpstan-shim \
+        roeldev/phpcs-ruleset \
+        squizlabs/php_codesniffer \
+ # add custom phpcs standard to available default standards
+ && ln -s \
+    /composer/vendor/roeldev/phpcs-ruleset \
+    /composer/vendor/squizlabs/php_codesniffer/src/Standards/roeldev \
+ # show the result of our building efforts
  && php -v \
  && composer --version --no-ansi
 
 WORKDIR /project/
-VOLUME ["/composer/", "/project/"]
+VOLUME ["/composer/cache/", "/project/"]
 ENTRYPOINT ["/init.sh"]
