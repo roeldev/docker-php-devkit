@@ -21,12 +21,12 @@ PHP devkit image with Composer and Xdebug enabled (not for PHP alphas/betas/rcs)
 
 # Versions
 
-| Image | PHP | Composer | Info |
-|-------|-----|----------|------|
-| [roeldev/php-devkit:7.1-latest][docker-tags-url] | 7.1.28 | 1.9.0 | [![mb-71-img]][mb-71-url]
-| [roeldev/php-devkit:7.2-latest][docker-tags-url] | 7.2.17 | 1.9.0 | [![mb-72-img]][mb-72-url]
-| [roeldev/php-devkit:7.3-latest][docker-tags-url] | 7.3.4 | 1.9.0 | [![mb-73-img]][mb-73-url]
-| [roeldev/php-devkit:7.4-rc-latest][docker-tags-url] | 7.4.0beta2 | - | [![mb-74-img]][mb-74-url]
+| Image | PHP | Xdebug | Composer | Info |
+|-------|-----|--------|----------|------|
+| [roeldev/php-devkit:7.1-latest][docker-tags-url] | 7.1.31 | 2.7.2 | 1.9.0 | [![mb-71-img]][mb-71-url]
+| [roeldev/php-devkit:7.2-latest][docker-tags-url] | 7.2.21 | 2.7.2 | 1.9.0 | [![mb-72-img]][mb-72-url]
+| [roeldev/php-devkit:7.3-latest][docker-tags-url] | 7.3.8 | 2.7.2 | 1.9.0 | [![mb-73-img]][mb-73-url]
+| [roeldev/php-devkit:7.4-rc-latest][docker-tags-url] | 7.4.0beta2 | - | 1.9.0 | [![mb-74-img]][mb-74-url]
 
 [docker-tags-url]: https://hub.docker.com/r/roeldev/php-devkit/tags
 [mb-71-img]: https://images.microbadger.com/badges/image/roeldev/php-devkit:7.1-latest.svg
