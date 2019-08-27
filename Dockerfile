@@ -11,7 +11,14 @@ ENV PS1="$(whoami)@$(hostname):$(pwd) \\$ " \
 RUN set -x \
  # update already installed packages
  && apk upgrade --no-cache \
- && apk update --no-cache
+ && apk update --no-cache \
+ && apk add \
+    --no-cache \
+        bash \
+        coreutils \
+        htop \
+        nano \
+        tzdata
 
 # add composer install script
 ADD https://raw.githubusercontent.com/roeldev/docker-php-cli/master/rootfs/usr/local/bin/install_composer.sh /install_composer.sh
@@ -38,17 +45,6 @@ RUN set -x \
  # install xdebug (default = true)
  && if ${INSTALL_XDEBUG}; then ./install_xdebug.sh; fi \
  && rm /install_xdebug.sh
-
-RUN set -x \
- && apk add \
-     --no-cache \
-         bash \
-         coreutils \
-         htop \
-         nano \
-         tzdata \
- # cleanup
- && rm -rf /tmp/*
 
 # add local files
 COPY rootfs/ /
