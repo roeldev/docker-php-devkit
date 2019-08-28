@@ -16,6 +16,7 @@ RUN set -x \
  # update already installed packages
  && apk upgrade --no-cache \
  && apk update --no-cache \
+ # add useful utils
  && apk add \
     --no-cache \
         bash \
@@ -23,10 +24,11 @@ RUN set -x \
         git \
         gzip \
         htop \
-        libzip-dev \
         nano \
         tzdata \
         unzip \
+        # ext-zip dependency
+        libzip-dev \
  && docker-php-ext-install zip
 
 # add installer scripts
