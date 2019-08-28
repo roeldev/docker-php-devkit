@@ -1,6 +1,5 @@
 #!/bin/sh
-
-set -x
+set -e
 
 # install xdebug dependencies
 apk add \
