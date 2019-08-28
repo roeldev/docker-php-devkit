@@ -23,9 +23,11 @@ RUN set -x \
         git \
         gzip \
         htop \
+        libzip-dev \
         nano \
         tzdata \
-        unzip
+        unzip \
+ && docker-php-ext-install zip
 
 # add installer scripts
 ADD ${PHP_CLI_REPO}/rootfs/usr/local/bin/install_composer.sh /tmp/
