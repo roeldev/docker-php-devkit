@@ -9,12 +9,35 @@ services:
         PHP_VERSION: "${PHP_VERSION}"
         INSTALL_XDEBUG: "${INSTALL_XDEBUG:-true}"
 
-  local:
-    image: roeldev/php-devkit:local
-    container_name: php-devkit
+  php-devkit_7.1:
+    image: roeldev/php-devkit:7.1-local
+    container_name: php-devkit_7.1
+    build:
+      context: .
+      args:
+        PHP_VERSION: "7.1"
+
+  php-devkit_7.2:
+    image: roeldev/php-devkit:7.2-local
+    container_name: php-devkit_7.2
+    build:
+      context: .
+      args:
+        PHP_VERSION: "7.2"
+
+  php-devkit_7.3:
+    image: roeldev/php-devkit:7.3-local
+    container_name: php-devkit_7.3
     build:
       context: .
       args:
         PHP_VERSION: "7.3"
-    environment:
-      PHP_EXTENSIONS: ""
+
+  php-devkit_7.4-rc:
+    image: roeldev/php-devkit:7.4-rc-local
+    container_name: php-devkit_7.4-rc
+    build:
+      context: .
+      args:
+        PHP_VERSION: "7.4-rc"
+        INSTALL_XDEBUG: "false"
