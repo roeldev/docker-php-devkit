@@ -1,3 +1,4 @@
+# https://hub.docker.com/_/php
 ARG PHP_VERSION="7.3"
 FROM php:${PHP_VERSION}-cli-alpine
 
@@ -16,7 +17,6 @@ RUN set -x \
  # update already installed packages
  && apk upgrade --no-cache \
  && apk update --no-cache \
- # add useful utils
  && apk add \
     --no-cache \
         bash \
@@ -33,7 +33,6 @@ RUN set -x \
 
 # add installer scripts
 ADD ${PHP_CLI_REPO}/rootfs/usr/local/bin/install_composer.sh /tmp/
-ADD ${PHP_CLI_REPO}/rootfs/usr/local/bin/install_devkit.sh /tmp/
 ADD https://get.symfony.com/cli/installer /tmp/symfony_installer.sh
 COPY install_xdebug.sh /tmp/
 
@@ -43,9 +42,21 @@ RUN set -x \
  && /tmp/install_composer.sh \
  # install xdebug (default = true)
  && if ${INSTALL_XDEBUG}; then /tmp/install_xdebug.sh; fi \
- # install useful dev tools
- && /tmp/install_devkit.sh \
+ # install symfony installer
  && bash /tmp/symfony_installer.sh \
+ # install useful common dev tools
+ && composer global require \
+    --no-ansi \
+    --no-cache \
+        laravel/installer \
+        phploc/phploc \
+        phpstan/phpstan-shim \
+        roeldev/phpcs-ruleset \
+        squizlabs/php_codesniffer \
+ # add custom phpcs standard to available default standards
+ && ln -s \
+    /composer/vendor/roeldev/phpcs-ruleset \
+    /composer/vendor/squizlabs/php_codesniffer/src/Standards/roeldev \
  # cleanup
  && rm -rf /tmp/*
 
