@@ -3,7 +3,6 @@ ARG PHP_VERSION="7.3"
 FROM php:${PHP_VERSION}-cli-alpine
 
 ARG INSTALL_XDEBUG=true
-ARG PHP_CLI_REPO=https://raw.githubusercontent.com/roeldev/docker-php-cli/master
 
 # expose environment variables
 ENV PS1="$(whoami)@$(hostname):$(pwd) \\$ " \
@@ -32,11 +31,16 @@ RUN set -x \
  && docker-php-ext-install zip
 
 # add installer scripts
-ADD ${PHP_CLI_REPO}/rootfs/usr/local/bin/install_composer.sh /tmp/
+ADD https://raw.githubusercontent.com/roeldev/docker-php-cli/master/rootfs/usr/local/bin/install_composer.sh /tmp/
 ADD https://get.symfony.com/cli/installer /tmp/symfony_installer.sh
-COPY install_xdebug.sh /tmp/
+
+# add local files
+COPY rootfs/ /
 
 RUN set -x \
+ # make executable, otherwise we can't enter the running container
+  # or call the scripts when building the docker image
+ && chmod +x /init.sh \
  && chmod -R +x /tmp/ \
  # install composer
  && /tmp/install_composer.sh \
@@ -44,6 +48,10 @@ RUN set -x \
  && if ${INSTALL_XDEBUG}; then /tmp/install_xdebug.sh; fi \
  # install symfony installer
  && bash /tmp/symfony_installer.sh \
+ # cleanup
+ && rm -rf /tmp/*
+
+RUN set -x \
  # install useful common dev tools
  && composer global require \
     --no-ansi \
@@ -57,16 +65,6 @@ RUN set -x \
  && ln -s \
     /composer/vendor/roeldev/phpcs-ruleset \
     /composer/vendor/squizlabs/php_codesniffer/src/Standards/roeldev \
- # cleanup
- && rm -rf /tmp/*
-
-# add local files
-COPY rootfs/ /
-
-RUN set -x \
- # make executable, otherwise we can't enter the running container
- # or call the scripts when building the docker image
- && chmod +x /init.sh \
  # show the result of our building efforts
  && php -v \
  && composer --version --no-ansi

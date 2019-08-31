@@ -11,7 +11,7 @@ trim_trailing_whitespace = true
 [*.bat]
 end_of_line = crlf
 
-[{*.json,*.yml}]
+[*.json]
 indent_size = 2
 
 [*.md]
@@ -20,3 +20,6 @@ trim_trailing_whitespace = false
 [{Makefile,**.mk}]
 # Use tabs for indentation (Makefiles require tabs)
 indent_style = tab
+
+[*.yml]
+indent_size = 2
