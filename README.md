@@ -16,7 +16,7 @@ docker-php-devkit
 [docker-pulls-url]: https://hub.docker.com/r/roeldev/php-devkit
 
 
-PHP devkit image with Composer and Xdebug enabled (not for PHP alphas/betas/rcs), based on the official PHP Alpine images.
+PHP devkit image with Composer and Xdebug (not for PHP alphas/betas/rcs), based on the [https://hub.docker.com/_/php](official PHP Alpine images).
 
 
 # Versions
@@ -42,6 +42,8 @@ PHP devkit image with Composer and Xdebug enabled (not for PHP alphas/betas/rcs)
 ## Links
 - GitHub: https://github.com/roeldev/docker-php-devkit
 - Docker Hub: https://hub.docker.com/r/roeldev/php-devkit
+- PHP: https://php.net
+- PHP Docker images: https://hub.docker.com/_/php
 - Composer: https://getcomposer.org/
 - Packagist: https://packagist.org/
 - Xdebug: https://xdebug.org/
